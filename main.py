@@ -33,4 +33,4 @@ def jiemimain(密钥, 内容):
 
 
 eel.init('web')
-eel.start('index.html', size=(350, 350))
+eel.start('index.html', size=(400, 400), port=1234)
