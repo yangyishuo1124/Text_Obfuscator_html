@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+    <script type="text/javascript" src="brython.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/python" src="main.py"></script>
+</head>
+<body onload="brython()">
+    <script type="text/python">
+        from browser import window
+        from main import *
+        window.encodemain = jiamimain
+        window.decodemain = jiemimain
+    </script>
+    <script type="text/javascript">
+        function encrypt_fun(key,data){
+            const result = encodemain(key,data );
+            $("#result").text('加密的结果是:'+result);
+        }
+        function decrypt_fun(key,data){
+            const result = decodemain(key, data);
+            $("#result").text('解密的结果是:'+result);
+        }
+    </script>
+
+<form name="数据">
+    <label>
+        <textarea name="data" cols="30" rows="10" placeholder="请输入需要加密或解密的文字"></textarea>
+        <div><input name="key" placeholder="请输入密钥"/></div>
+        <button type="button" name="encrypt" onclick="encrypt_fun(数据.key.value,数据.data.value)">加密</button>
+        <button type="button" name="decrypt" onclick="decrypt_fun(数据.key.value,数据.data.value)">解密</button>
+    </label>
+</form>
+<p id="result"></p>
+<div>Tip:密钥不可为空，不可大于8位</div>
+</body>
+</html>
