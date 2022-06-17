@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head onload="brython()">
     <meta charset="UTF-8">
     <title>HelloWorld</title>
     <script type="text/javascript" src="brython.js"></script>
+    <script type="text/javascript" src="brython_stdlib.js"></script>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/python" src="main.py"></script>
 </head>
@@ -14,9 +15,9 @@
         window.encodemain = jiamimain
         window.decodemain = jiemimain
     </script>
-    <script type="text/javascript">
+    <script type="text/javascript" >
         function encrypt_fun(key,data){
-            const result = encodemain(key,data );
+            const result = encodemain(key, data);
             $("#result").text('加密的结果是:'+result);
         }
         function decrypt_fun(key,data){
@@ -33,7 +34,7 @@
         <button type="button" name="decrypt" onclick="decrypt_fun(数据.key.value,数据.data.value)">解密</button>
     </label>
 </form>
-<p id="result"></p>
-<div>Tip:密钥不可为空，不可大于8位</div>
+    <p id="result"></p>
+    <div>Tip:密钥不可为空，不可大于8位</div>
 </body>
 </html>
