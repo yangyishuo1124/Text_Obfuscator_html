@@ -1,13 +1,13 @@
 #main{
     display: flex;
     flex-direction: column;
-    margin-top: 25%;
+    margin-top: 15%;
     background: #ffa8e9;
 }
 #data{
     border: 3px solid white;
-    width: 50%;
-    height: 40%;
+    width: 25%;
+    height: 15%;
     border-radius: 5px;
     margin: 0 auto 10px;
     background: #ffa8e9;
@@ -17,7 +17,7 @@
     border: 3px solid white;
     border-radius: 8px;
     height: 15%;
-    width: 50%;
+    width: 25%;
 }
 #button{
     text-align: center;
