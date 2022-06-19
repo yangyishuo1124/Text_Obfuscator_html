@@ -27,9 +27,9 @@ class jiami(object):
 
 
 class jiemi(object):
-    def __init__(self,key: str,data: str):
+    def __init__(self, key: str, data: str):
         self.key = key
-        self.key_add= 0
+        self.key_add = 0
         if self.key.isdigit():
             if len(self.key) > 5:
                 for i in self.key:
@@ -42,6 +42,7 @@ class jiemi(object):
         self.data = data
         self.jiemi_result_list = []
         self.jiemi_result = ''
+
     def jiemi(self):
         for i in self.data:
             try:
@@ -54,7 +55,6 @@ class jiemi(object):
 
     def result(self):
         return self.jiemi_result
-
 
 
 def jiamimain(key, data):
@@ -83,5 +83,3 @@ def jiemimain(key, data):
         a = jiemi(key, data)
         a.jiemi()
         return a.result()
-
-
