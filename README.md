@@ -3,10 +3,9 @@
 - 将文本混淆为不可读文本（指伪乱码)
 ## 使用方法
     1.下载最新Releases，解压
-    2.打开index.html或index_onlyone.html
+    2.打开index.html
     3.按照提示输入所需文本
     4.点击“加密”或“解密”按钮，获得加密或解密后的文本
-Tip:‘index.html’需要浏览器开启axel（好像是这个词），而使用‘index_onlyone.html’不需要额外支持，即开即用，建议个人用‘index.html’，服务器网站用‘index_onlyone.html’
 ## 用途
     1.混淆网站链接（某度云盘链接等），防止被软件和谐
     2.密文传递，保护隐私
