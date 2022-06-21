@@ -65,8 +65,8 @@ if($B.isWebWorker){$B.charset="utf-8"}else{
 $B.charset=document.characterSet ||document.inputEncoding ||"utf-8"}
 $B.max_int=Math.pow(2,53)-1
 $B.min_int=-$B.max_int
-$B.max_float=new Number(Number.MAX_VALUE)
-$B.min_float=new Number(Number.MIN_VALUE)
+$B.max_float=Number(Number.MAX_VALUE)
+$B.min_float=Number(Number.MIN_VALUE)
 $B.special_string_repr={8:"\\x08",9:"\\t",10:"\\n",11:"\\x0b",12:"\\x0c",13:"\\r",92:"\\\\",160:"\\xa0"}
 $B.$py_next_hash=Math.pow(2,53)-1
 $B.$py_UUID=0
@@ -4269,7 +4269,7 @@ indent++
 if(! expect_indent){C=C ||new $NodeCtx(node)
 $_SyntaxError(C,'unexpected indent',$pos)}
 expect_indent=false
-continue}}}
+}}}
 var $create_root_node=$B.parser.$create_root_node=function(src,module,locals_id,parent_block,line_num){var root=new $Node('module')
 root.module=module
 root.id=locals_id
@@ -4374,7 +4374,7 @@ return options}
 if(!($B.isWebWorker ||$B.isNode)){var observer=new MutationObserver(function(mutations){for(var i=0;i < mutations.length;i++){for(var j=0;j < mutations[i].addedNodes.length;j++){checkPythonScripts(mutations[i].addedNodes[j]);}}});
 observer.observe(document.documentElement,{childList:true,subtree:true});}
 function checkPythonScripts(addedNode){if(addedNode.tagName=='SCRIPT' && addedNode.type=="text/python"){var options={}
-for(var attr of addedNode.attributes){if(attr.nodeName=="type"){continue}else if(attr.nodeName=='debug'){options[attr.nodeName]=parseInt(attr.nodeValue)}else{options[attr.nodeName]=attr.nodeValue}}}}
+for(var attr of addedNode.attributes){if(attr.nodeName=="type"){}else if(attr.nodeName=='debug'){options[attr.nodeName]=parseInt(attr.nodeValue)}else{options[attr.nodeName]=attr.nodeValue}}}}
 var brython=$B.parser.brython=function(options){options=$B.parse_options(options)
 if(!($B.isWebWorker ||$B.isNode)){observer.disconnect()}else{return}
 if(options===undefined){options={}}
@@ -4842,7 +4842,7 @@ if(mro_entries !==_b_.None){var entries=_b_.list.$factory(mro_entries(bases))
 bases.splice(i,1,...entries)
 use_mro_entries=true
 i--
-continue}}}
+}}}
 if(metaclass===undefined){metaclass=meta_from_bases(class_name,module,bases)}
 var prepare=$B.$getattr(metaclass,"__prepare__",_b_.None),cl_dict=$B.$call(prepare)(class_name,bases)
 if(cl_dict.__class__ !==_b_.dict){var set_class_item=$B.$getattr(cl_dict,"__setitem__")}else{var set_class_item=function(attr,value){cl_dict.$string_dict[attr]=[value,cl_dict.$order++]}}
@@ -5621,7 +5621,7 @@ y.valueOf && typeof y.valueOf()=="number"){if(typeof x=="number" && typeof y=="n
 var z=x+y
 if(z < $B.max_int && z > $B.min_int){return z}else if(z===Infinity){return _b_.float.$factory("inf")}else if(z===-Infinity){return _b_.float.$factory("-inf")}else if(isNaN(z)){return _b_.float.$factory('nan')}
 return $B.long_int.__add__($B.long_int.$factory(x),$B.long_int.$factory(y))}else{
-return new Number(x+y)}}else if(typeof x=="string" && typeof y=="string"){
+return Number(x+y)}}else if(typeof x=="string" && typeof y=="string"){
 return x+y}
 try{var method=$B.$getattr(x.__class__ ||$B.get_class(x),"__add__")}catch(err){if(err.__class__===_b_.AttributeError){throw _b_.TypeError.$factory("unsupported operand type(s) for "+
 "+: '"+$B.class_name(x)+"' and '"+$B.class_name(y)+"'")}
@@ -5637,7 +5637,7 @@ if(x > min_int && x < max_int && y > min_int && y < max_int
 && z > min_int && z < max_int){return Math.floor(z)}
 else{return $B.long_int.__floordiv__($B.long_int.$factory(x),$B.long_int.$factory(y))}}
 $B.mul=function(x,y){var z=(typeof x !="number" ||typeof y !="number")?
-new Number(x*y):x*y
+Number(x*y):x*y
 if(x > min_int && x < max_int && y > min_int && y < max_int
 && z > min_int && z < max_int){return z}
 else if((typeof x=="number" ||x.__class__===$B.long_int)
@@ -5649,7 +5649,7 @@ if(y==0){return _b_.float.$factory("nan")}else{return y > 0 ? x :-x}}
 return $B.long_int.__mul__($B.long_int.$factory(x),$B.long_int.$factory(y))}else{return z}}
 $B.sub=function(x,y){if(x instanceof Number && y instanceof Number){return x-y}
 var z=(typeof x !="number" ||typeof y !="number")?
-new Number(x-y):x-y
+Number(x-y):x-y
 if(x > min_int && x < max_int && y > min_int && y < max_int
 && z > min_int && z < max_int){return z}else if((typeof x=="number" ||x.__class__===$B.long_int)
 &&(typeof y=="number" ||y.__class__===$B.long_int)){if(typeof x=="number" && typeof y=="number"){if(isNaN(x)||isNaN(y)){return _b_.float.$factory("nan")}else if(x===Infinity ||x===-Infinity){if(y===x){return _b_.float.$factory("nan")}else{return x}}else if(y===Infinity ||y===-Infinity){if(y===x){return _b_.float.$factory("nan")}else{return-y}}}
@@ -6832,7 +6832,7 @@ var mult=Math.pow(10,n),x=arg*mult,floor=Math.floor(x),diff=Math.abs(x-floor),re
 if(diff==0.5){if(floor % 2){floor+=1}
 res=_b_.int.__truediv__(floor,mult)}else{res=_b_.int.__truediv__(Math.round(x),mult)}
 if($.ndigits===None){
-return res.valueOf()}else if(arg instanceof Number){return new Number(res)}else{return res.valueOf()}}
+return res.valueOf()}else if(arg instanceof Number){return Number(res)}else{return res.valueOf()}}
 function setattr(){var $=$B.args('setattr',3,{obj:null,attr:null,value:null},['obj','attr','value'],arguments,{},null,null),obj=$.obj,attr=$.attr,value=$.value
 if(!(typeof attr=='string')){throw _b_.TypeError.$factory("setattr(): attribute name must be string")}
 return $B.$setattr(obj,attr,value)}
@@ -8729,7 +8729,7 @@ throw _b_.TypeError.$factory(
 "keyword arguments")}else{args.push($B.pyobj2jsobj(arg))}}
 return args}
 $B.JSObj=$B.make_class("JSObject",function(jsobj){if(Array.isArray(jsobj)){}else if(typeof jsobj=="function"){jsobj.$is_js_func=true
-jsobj.__new__=function(){return new jsobj.$js_func(...arguments)}}else if(typeof jsobj=="number" && ! Number.isInteger(jsobj)){return new Number(jsobj)}
+jsobj.__new__=function(){return new jsobj.$js_func(...arguments)}}else if(typeof jsobj=="number" && ! Number.isInteger(jsobj)){return Number(jsobj)}
 return jsobj}
 )
 $B.JSObj.__sub__=function(self,other){
@@ -9415,7 +9415,7 @@ if(cp >=0x10000){surrogates.push(j)
 i++}
 j++}
 if(surrogates.length==0){return s}
-var res=new String(s)
+var res=String(s)
 res.__class__=str
 res.surrogates=surrogates
 return res}
@@ -10004,7 +10004,7 @@ str.islower=function(){
 var $=$B.args("islower",1,{self:null},["self"],arguments,{},null,null),has_cased=false,cp,_self=to_string($.self)
 for(var char of to_chars(_self)){cp=_b_.ord(char)
 if(unicode_tables.Ll[cp]){has_cased=true
-continue}else if(unicode_tables.Lu[cp]||unicode_tables.Lt[cp]){return false}}
+}else if(unicode_tables.Lu[cp]||unicode_tables.Lt[cp]){return false}}
 return has_cased}
 str.isnumeric=function(){
 var $=$B.args("isnumeric",1,{self:null},["self"],arguments,{},null,null),_self=to_string(self)
@@ -10031,7 +10031,7 @@ str.isupper=function(self){
 var $=$B.args("islower",1,{self:null},["self"],arguments,{},null,null),is_upper=false,cp,_self=to_string(self)
 for(var char of to_chars(_self)){cp=_b_.ord(char)
 if(unicode_tables.Lu[cp]){is_upper=true
-continue}else if(unicode_tables.Ll[cp]||unicode_tables.Lt[cp]){return false}}
+}else if(unicode_tables.Ll[cp]||unicode_tables.Lt[cp]){return false}}
 return is_upper}
 str.join=function(){var $=$B.args("join",2,{self:null,iterable:null},["self","iterable"],arguments,{},null,null),_self=to_string($.self)
 var iterable=_b_.iter($.iterable),res=[],count=0
@@ -10509,7 +10509,7 @@ if(_b_.isinstance(other,_b_.float)){return self.valueOf()==other.valueOf()}
 if(_b_.isinstance(other,_b_.complex)){if(other.$imag !=0){return _b_.False}
 return self.valueOf()==other.$real}
 return _b_.NotImplemented}
-int.__float__=function(self){return new Number(self)}
+int.__float__=function(self){return Number(self)}
 function preformat(self,fmt){if(fmt.empty){return _b_.str.$factory(self)}
 if(fmt.type && 'bcdoxXn'.indexOf(fmt.type)==-1){throw _b_.ValueError.$factory("Unknown format code '"+fmt.type+
 "' for object of type 'int'")}
@@ -10617,11 +10617,11 @@ if(base*base > $B.max_int){base=long_int.__mul__(long_int.$factory(base),long_in
 base=long_int.__mod__(base,z)}else{base=(base*base)% z}}
 return result}
 var res=Math.pow(self.valueOf(),other.valueOf())
-if(res > $B.min_int && res < $B.max_int){return other > 0 ? res :new Number(res)}else if(res !==Infinity && !isFinite(res)){return res}else{if($B.BigInt){return{
+if(res > $B.min_int && res < $B.max_int){return other > 0 ? res :Number(res)}else if(res !==Infinity && !isFinite(res)){return res}else{if($B.BigInt){return{
 __class__:$B.long_int,value:($B.BigInt(self)**$B.BigInt(other)).toString(),pos:true}}
 return $B.long_int.__pow__($B.long_int.$from_int(self),$B.long_int.$from_int(other))}}
 if(_b_.isinstance(other,_b_.float)){other=_b_.float.numerator(other)
-if(self >=0){return new Number(Math.pow(self,other))}else{
+if(self >=0){return Number(Math.pow(self,other))}else{
 return _b_.complex.__pow__($B.make_complex(self,0),other)}}else if(_b_.isinstance(other,_b_.complex)){var preal=Math.pow(self,other.$real),ln=Math.log(self)
 return $B.make_complex(preal*Math.cos(ln),preal*Math.sin(ln))}
 var rpow=$B.$getattr(other,"__rpow__",_b_.None)
@@ -10654,8 +10654,8 @@ if(res > $B.min_int && res < $B.max_int){return res}else{return $B.long_int.__su
 return _b_.NotImplemented}
 int.__truediv__=function(self,other){if(_b_.isinstance(other,int)){other=int_value(other)
 if(other==0){throw _b_.ZeroDivisionError.$factory("division by zero")}
-if(other.__class__===$B.long_int){return new Number(self/parseInt(other.value))}
-return new Number(self/other)}
+if(other.__class__===$B.long_int){return Number(self/parseInt(other.value))}
+return Number(self/other)}
 return _b_.NotImplemented}
 int.bit_count=function(self){var s=_b_.bin(_b_.abs(self)),nb=0
 for(var x of s){if(x=='1'){nb++}}
@@ -10778,7 +10778,7 @@ return res}}}
 var bool={__bases__:[int],__class__:_b_.type,__mro__:[int,_b_.object],$infos:{__name__:"bool",__module__:"builtins"},$is_class:true,$native:true,$descriptors:{"numerator":true,"denominator":true,"imag":true,"real":true}}
 bool.__and__=function(self,other){if(_b_.isinstance(other,bool)){return self && other}else if(_b_.isinstance(other,int)){return int.__and__(bool.__index__(self),int.__index__(other))}
 return _b_.NotImplemented}
-bool.__float__=function(self){return self ? new Number(1):new Number(0)}
+bool.__float__=function(self){return self ? Number(1):Number(0)}
 bool.__hash__=bool.__index__=bool.__int__=function(self){if(self.valueOf())return 1
 return 0}
 bool.__neg__=function(self){return-$B.int_or_bool(self)}
@@ -10920,7 +10920,7 @@ return $B.fast_tuple([from_BigInt(quotient),from_BigInt(rest)])}
 long_int.__eq__=function(self,other){if(typeof other=="number"){other=long_int.$factory(_b_.str.$factory(other))}
 return self.value==other.value && self.pos==other.pos}
 long_int.__float__=function(self){if(! isFinite(parseFloat(self.value))){throw _b_.OverflowError.$factory("int too big to convert to float")}
-return new Number((self.pos ? 1 :-1)*parseFloat(self.value))}
+return Number((self.pos ? 1 :-1)*parseFloat(self.value))}
 long_int.__floordiv__=function(self,other){if(_b_.isinstance(other,_b_.float)){return _b_.float.$factory(to_int(self)/other)}
 if(typeof other=="number" && Math.abs(other)< $B.max_safe_divider){var t=self.value,res=divmod_by_safe_int(t,other),pos=other > 0 ? self.pos :!self.pos
 return{__class__:long_int,value:res[0],pos:pos}}
@@ -11056,7 +11056,7 @@ for(var x of s){if(x=='1'){nb++}}
 return nb}
 long_int.bit_length=function(self){return binary(self).length}
 function _infos(self){
-var nbits=$B.long_int.bit_length(self),pow2=2n**BigInt(nbits-1),rest=BigInt(self.value)-pow2,relative_rest=new Number(rest)/new Number(pow2)
+var nbits=$B.long_int.bit_length(self),pow2=2n**BigInt(nbits-1),rest=BigInt(self.value)-pow2,relative_rest=Number(rest)/Number(pow2)
 return{nbits,pow2,rest,relative_rest}}
 long_int.$log2=function(x){if(! x.pos){throw _b_.ValueError.$factory('math domain error')}
 var infos=_infos(x)
@@ -11129,8 +11129,8 @@ else{throw _b_.ValueError.$factory(
 res.pos=pos
 return res}else if(_b_.isinstance(value,_b_.float)){if(value===Number.POSITIVE_INFINITY ||
 value===Number.NEGATIVE_INFINITY){return value}
-if(value >=0){value=new Number(Math.round(value.value))}
-else{value=new Number(Math.ceil(value.value))}}else if(_b_.isinstance(value,_b_.bool)){if(value.valueOf()){return _b_.int.$factory(1)}
+if(value >=0){value=Number(Math.round(value.value))}
+else{value=Number(Math.ceil(value.value))}}else if(_b_.isinstance(value,_b_.bool)){if(value.valueOf()){return _b_.int.$factory(1)}
 return _b_.int.$factory(0)}else if(value.__class__===long_int){return value}else if(_b_.isinstance(value,_b_.int)){
 value=value.$brython_value+""}else if(_b_.isinstance(value,_b_.bool)){value=_b_.bool.__int__(value)+""}else if(typeof value !="string"){throw _b_.ValueError.$factory(
 "argument of long_int must be a string, not "+
@@ -11222,7 +11222,7 @@ $B.shift1_cache[py_exponent]=x}
 py_exponent=x
 if(exponent > 0){numerator=$B.rich_op("__mul__",numerator,py_exponent)}else{denominator=py_exponent}
 return $B.fast_tuple([_b_.int.$factory(numerator),_b_.int.$factory(denominator)])}
-float.__abs__=function(self){return new Number(Math.abs(float_value(self)))}
+float.__abs__=function(self){return Number(Math.abs(float_value(self)))}
 float.__bool__=function(self){self=float_value(self)
 return _b_.bool.$factory(self.valueOf())}
 float.__divmod__=function(self,other){if(! _b_.isinstance(other,[_b_.int,float])){return _b_.NotImplemented}
@@ -11270,7 +11270,7 @@ var _sign=_m[1],_int=parseInt(_m[3]||'0',16),_fraction=_m[4]||'.0',_exponent=_m[
 if(_sign=="-"){_sign=-1}else{_sign=1}
 var _sum=_int
 for(var i=1,len=_fraction.length;i < len;i++){_sum+=parseInt(_fraction.charAt(i),16)/Math.pow(16,i)}
-return new Number(_sign*_sum*Math.pow(2,parseInt(_exponent.substring(1))))}
+return Number(_sign*_sum*Math.pow(2,parseInt(_exponent.substring(1))))}
 float.__getformat__=function(arg){if(arg=="double" ||arg=="float"){return "IEEE, little-endian"}
 throw _b_.ValueError.$factory("__getformat__() argument 1 must be "+
 "'double' or 'float'")}
@@ -11346,7 +11346,7 @@ x1==Number.POSITIVE_INFINITY ||x1==Number.NEGATIVE_INFINITY}
 function isnan(x){var x1=x
 if(_b_.isinstance(x,float)){x1=float.numerator(x)}
 return isNaN(x1)}
-function fabs(x){if(x==0){return new Number(0)}
+function fabs(x){if(x==0){return Number(0)}
 return x > 0 ? float.$factory(x):float.$factory(-x)}
 function frexp(x){var x1=x
 if(_b_.isinstance(x,float)){x1=x.valueOf()}
@@ -11404,22 +11404,22 @@ self=float_value(self)
 other=float_value(other)
 if(other==0){throw _b_.ZeroDivisionError.$factory("float modulo")}
 if(_b_.isinstance(other,_b_.int)){other=_b_.int.numerator(other)
-return new Number((self % other+other)% other)}
+return Number((self % other+other)% other)}
 if(_b_.isinstance(other,float)){
 var q=Math.floor(self/other),r=self-other*q
-return new Number(r)}
+return Number(r)}
 return _b_.NotImplemented}
 float.__mro__=[object]
 float.__mul__=function(self,other){self=float_value(self)
 other=float_value(other)
-if(_b_.isinstance(other,_b_.int)){if(other.__class__==$B.long_int){return new Number(self*parseFloat(other.value))}
+if(_b_.isinstance(other,_b_.int)){if(other.__class__==$B.long_int){return Number(self*parseFloat(other.value))}
 other=_b_.int.numerator(other)
-return new Number(self*other)}
-if(_b_.isinstance(other,float)){return new Number(self*float_value(other))}
+return Number(self*other)}
+if(_b_.isinstance(other,float)){return Number(self*float_value(other))}
 return _b_.NotImplemented}
 float.__ne__=function(self,other){var res=float.__eq__(self,other)
 return res===_b_.NotImplemented ? res :! res}
-float.__neg__=function(self){return new Number(-float_value(self))}
+float.__neg__=function(self){return Number(-float_value(self))}
 float.__new__=function(cls,value){if(cls===undefined){throw _b_.TypeError.$factory("float.__new__(): not enough arguments")}else if(! _b_.isinstance(cls,_b_.type)){throw _b_.TypeError.$factory("float.__new__(X): X is not a type object")}
 if(cls===float){return float.$factory(value)}
 return{
@@ -11428,16 +11428,16 @@ float.__pos__=function(self){return float_value(self)}
 float.__pow__=function(self,other){self=float_value(self)
 other=float_value(other)
 var other_int=_b_.isinstance(other,_b_.int)
-if(other_int ||_b_.isinstance(other,float)){if(self==1){return new Number(1)}
-if(other==0){return new Number(1)}
+if(other_int ||_b_.isinstance(other,float)){if(self==1){return Number(1)}
+if(other==0){return Number(1)}
 if(self==-1 &&
 (! isFinite(other)||other.__class__===$B.long_int ||
 ! $B.is_safe_int(other))&&
-! isNaN(other)){return new Number(1)}else if(self==0 && isFinite(other)&& other < 0){throw _b_.ZeroDivisionError.$factory("0.0 cannot be raised "+
-"to a negative power")}else if(self==Number.NEGATIVE_INFINITY && ! isNaN(other)){if(other < 0 && other % 2==1){return new Number(-0.0)}else if(other < 0){return new Number(0)}
-else if(other > 0 && other % 2==1){return Number.NEGATIVE_INFINITY}else{return Number.POSITIVE_INFINITY}}else if(self==Number.POSITIVE_INFINITY && ! isNaN(other)){return other > 0 ? self :new Number(0)}
+! isNaN(other)){return Number(1)}else if(self==0 && isFinite(other)&& other < 0){throw _b_.ZeroDivisionError.$factory("0.0 cannot be raised "+
+"to a negative power")}else if(self==Number.NEGATIVE_INFINITY && ! isNaN(other)){if(other < 0 && other % 2==1){return Number(-0.0)}else if(other < 0){return Number(0)}
+else if(other > 0 && other % 2==1){return Number.NEGATIVE_INFINITY}else{return Number.POSITIVE_INFINITY}}else if(self==Number.POSITIVE_INFINITY && ! isNaN(other)){return other > 0 ? self :Number(0)}
 if(other==Number.NEGATIVE_INFINITY && ! isNaN(self)){return Math.abs(self)< 1 ? Number.POSITIVE_INFINITY :
-new Number(0)}else if(other==Number.POSITIVE_INFINITY && ! isNaN(self)){return Math.abs(self)< 1 ? new Number(0):
+Number(0)}else if(other==Number.POSITIVE_INFINITY && ! isNaN(self)){return Math.abs(self)< 1 ? Number(0):
 Number.POSITIVE_INFINITY}
 if(self < 0 &&
 ! $B.$getattr(other,"__eq__")(_b_.int.$factory(other))){
@@ -11522,7 +11522,7 @@ float['__'+r_opname+'__']){float["__r"+r_opname+"__"]=(function(name){return fun
 return float["__"+name+"__"](other,self)}else if(_b_.isinstance(other,float)){other=float_value(other)
 return float["__"+name+"__"](other,self)}
 return _b_.NotImplemented}})(r_opname)}}
-function $FloatClass(value){return new Number(value)}
+function $FloatClass(value){return Number(value)}
 function to_digits(s){
 var arabic_digits="\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669",res=""
 for(var i=0;i < s.length;i++){var x=arabic_digits.indexOf(s[i])
@@ -11536,10 +11536,10 @@ return $FloatClass(Infinity)
 case-Number.MAX_VALUE:
 return $FloatClass(-Infinity)
 case true:
-return new Number(1)
+return Number(1)
 case false:
-return new Number(0)}
-if(typeof value=="number"){return new Number(value)}
+return Number(0)}
+if(typeof value=="number"){return Number(value)}
 if(_b_.isinstance(value,float)){return float_value(value)}
 if(_b_.isinstance(value,_b_.bytes)){var s=$B.$getattr(value,"decode")("latin-1")
 return float.$factory($B.$getattr(value,"decode")("latin-1"))}
@@ -11745,9 +11745,9 @@ throw _b_.TypeError.$factory("no ordering relation "+
 $comp_func+='' 
 for(var $op in $B.$comps){eval("complex.__"+$B.$comps[$op]+"__ = "+
 $comp_func.replace(/>/gm,$op))}
-complex.real=function(self){return new Number(self.$real)}
+complex.real=function(self){return Number(self.$real)}
 complex.real.setter=function(){throw _b_.AttributeError.$factory("readonly attribute")}
-complex.imag=function(self){return new Number(self.$imag)}
+complex.imag=function(self){return Number(self.$imag)}
 complex.imag.setter=function(){throw _b_.AttributeError.$factory("readonly attribute")}
 var _real=1,_real_mantissa=2,_sign=3,_imag=4,_imag_mantissa=5,_j=6
 var type_conversions=["__complex__","__float__","__index__"]
@@ -12176,7 +12176,7 @@ if(typeof dict[attr]=="function"){mappingproxy[attr]=(function(key){return funct
 $B.set_func_names(mappingproxy,"builtins")
 function jsobj2dict(x,exclude){exclude=exclude ||function(){return false}
 var d=$B.empty_dict()
-for(var attr in x){if(attr.charAt(0)!="$" && ! exclude(attr)){if(x[attr]===null){d.$string_dict[attr]=[_b_.None,d.$order++]}else if(x[attr]===undefined){continue}else if(x[attr].$jsobj===x){d.$string_dict[attr]=[d,d.$order++]}else{d.$string_dict[attr]=[$B.$JS2Py(x[attr]),d.$order++]}}}
+for(var attr in x){if(attr.charAt(0)!="$" && ! exclude(attr)){if(x[attr]===null){d.$string_dict[attr]=[_b_.None,d.$order++]}else if(x[attr]===undefined){}else if(x[attr].$jsobj===x){d.$string_dict[attr]=[d,d.$order++]}else{d.$string_dict[attr]=[$B.$JS2Py(x[attr]),d.$order++]}}}
 return d}
 $B.obj_dict=function(obj,exclude){var klass=obj.__class__ ||$B.get_class(obj)
 if(klass !==undefined && klass.$native){throw $B.attr_error("__dict__",obj)}
@@ -13776,7 +13776,7 @@ if(js_node.sign=='-'){res.pos=false}
 return res}
 return js_node.sign=='-' ?-res :res
 case 'float':
-return new Number(js_node.value)
+return Number(js_node.value)
 case 'imaginary':
 return $B.make_complex(0,$B.AST.$convert(js_node.value))
 case 'ellipsis':
@@ -14720,7 +14720,7 @@ for(var i=0,len=this.kwd_patterns.length;i < len;i++){kw.push(this.kwd_attrs[i]+
 $B.js_from_ast(this.kwd_patterns[i],scopes)+'}')}
 return `class: ${cls}, args: [${patterns}], keywords: {${kw.join(', ')}}`}
 $B.ast.MatchMapping.prototype.to_js=function(scopes){var keys=[]
-for(var key of this.keys){if(key instanceof $B.ast.Attribute){continue}else if(key instanceof $B.ast.Constant ||
+for(var key of this.keys){if(key instanceof $B.ast.Attribute){}else if(key instanceof $B.ast.Constant ||
 key instanceof $B.ast.UnaryOp ||
 key instanceof $B.ast.BinOp){var value=eval(key.to_js(scopes))
 if(_b_.list.__contains__(keys,value)){compiler_error(this,'mapping pattern checks duplicate key '+

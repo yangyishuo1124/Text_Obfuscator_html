@@ -1,0 +1,36 @@
+body{
+    background: #d7e1ec;
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    float: left;
+    margin-top: 15%;
+    margin-left: 35%;
+}
+#data{
+    width: 100%;
+    height: 60%;
+}
+#key{
+    margin-top: 10px;
+    width: 100%;
+}
+#data,#key{
+    border: 2px solid white;
+    border-radius: 10px;
+    background: #d7e1ec;
+}
+#button{
+    float: left;
+    margin-left: 20px;
+    margin-top: 15%;
+    display: flex;
+    flex-direction: column;
+}
+#result{
+    color: green;
+}
+#result,#tip{
+    margin-top: 10px;
+}

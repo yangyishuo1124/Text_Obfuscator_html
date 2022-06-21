@@ -3,40 +3,58 @@
 <head onload="brython()">
     <meta charset="UTF-8">
     <title>HelloWorld</title>
-    <script type="text/javascript" src="brython.js"></script>
-    <script type="text/javascript" src="brython_stdlib.js"></script>
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/python" src="main.py"></script>
-    <link rel="stylesheet" href="main.css">
+    <script src="brython.js" type="text/javascript"></script>
+    <script src="brython_stdlib.js" type="text/javascript"></script>
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="main.py" type="text/python"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet">
+
 </head>
-<body onload="brython()" style="background: #ffa8e9">
-    <script type="text/python">
+<body onload="brython()">
+<script type="text/python">
         from browser import window
         from main import *
         window.encodemain = jiamimain
         window.decodemain = jiemimain
-    </script>
-    <script type="text/javascript" >
-        function encrypt_fun(key,data){
-            const result = encodemain(key, data);
-            $("#result").text('加密的结果是:'+result);
-        }
-        function decrypt_fun(key,data){
-            const result = decodemain(key, data);
-            $("#result").text('解密的结果是:'+result);
-        }
-    </script>
+
+</script>
+<script type="text/javascript">
+    function encrypt_fun(key, data) {
+        const result = encodemain(key, data);
+        $("#result").text('加密的结果是:' + result);
+    }
+
+    function decrypt_fun(key, data) {
+        const result = decodemain(key, data);
+        $("#result").text('解密的结果是:' + result);
+    }
+</script>
 
 <form name="数据">
     <div id="main">
-        <textarea id="data" name="data" cols="30" rows="10" placeholder="请输入需要加密或解密的文字"></textarea>
-        <input id="key" name="key" placeholder="请输入密钥"/></div>
-        <div id="button">
-            <button class="button_class" id="encrypt" type="button" name="encrypt" onclick="encrypt_fun(数据.key.value,数据.data.value)">加密</button>
-            <button class="button_class" id="decrypt" type="button" name="decrypt" onclick="decrypt_fun(数据.key.value,数据.data.value)">解密</button>
+        <textarea cols="30" id="data" name="data" placeholder="请输入需要加密或解密的文字" rows="10"></textarea>
+        <input id="key" name="key" placeholder="请输入密钥"/>
+    </div>
+    <div id="button">
+        <div class="wrapper" style="display: flex; flex-direction: column">
+            <div class="button">
+                <div class="icon">
+                    <i class="fa fa-chain fa-2x" onclick="encrypt_fun(数据.key.value,数据.data.value)"></i>
+                </div>
+                <span><a id="encrypt" onclick="encrypt_fun(数据.key.value,数据.data.value)">加密</a></span>
+            </div>
+            <div class="button">
+                <div class="icon">
+                    <i class="fa fa-chain-broken fa-2x" onclick="decrypt_fun(数据.key.value,数据.data.value)"></i>
+                </div>
+                <span><a id="decrypt" onclick="decrypt_fun(数据.key.value,数据.data.value)">解密</a></span>
+            </div>
+                <p id="result">此处出现结果</p>
+                <p id="tip">Tip:密钥不可为空，不可大于8位</p>
         </div>
+    </div>
 </form>
-    <p id="result"></p>
-    <div id="tip">Tip:密钥不可为空，不可大于8位</div>
 </body>
 </html>
