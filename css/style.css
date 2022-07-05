@@ -19,7 +19,10 @@
     margin: 10px 0 0;
 }
 .wrapper .button:hover{
-  width: 130px;
+  width: 120px;
+}
+.wrapper #file:hover{
+  width: 160px;
 }
 .wrapper .button .icon{
   display: inline-block;
