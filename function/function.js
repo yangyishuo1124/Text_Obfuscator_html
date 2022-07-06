@@ -87,15 +87,15 @@
 
             document.getElementById("data").disabled = true;
             if (result === '密钥不能为空') {
-                $("#result").text('密钥不能为空')
+                $("#result").text('密钥不能为空');
             } else if (result === '密钥长度错误,请重新输入(密钥长度不能大于8)') {
                 $("#result").text('密钥长度错误,请重新输入(密钥长度不能大于8)')
             } else if (result === '输入的内容不是密文') {
                 $("#result").text('输入的内容不是密文')
             } else {
-                $("#download").href(result)
-                $("#download").click()
-                $("#result").text('已下载输出文件')
+                document.getElementById('download').href = result;
+                $("#result").text('已下载输出文件');
+                document.getElementById("download").click();
 
             }
         }
