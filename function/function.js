@@ -94,6 +94,7 @@
                 $("#result").text = '输入的内容不是密文'
             } else {
                 $("#download").href= result
+                $("#download").click()
                 $("#result").text = '已下载输出文件'
 
             }
