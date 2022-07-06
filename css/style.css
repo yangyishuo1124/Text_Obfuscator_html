@@ -64,10 +64,10 @@
   #margin-left: 10px;
   transition: all 0.3s ease-out;
 }
-.wrapper .button:nth-child(1) span{
+.wrapper .button:nth-child(1) span,#encrypt{
   color: #4267B2;
 }
-.wrapper .button:nth-child(2) span{
+.wrapper .button:nth-child(2) span,#decrypt{
   color: #1DA1F2;
 }
 .wrapper .button:nth-child(3) span{

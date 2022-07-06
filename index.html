@@ -19,96 +19,156 @@
         window.encodemain = jiamimain
         window.decodemain = jiemimain
 
+
+
+
 </script>
 <script type="text/javascript">
     async function copyPageUrl(data) {
-  try {
-    await navigator.clipboard.writeText(data);
-    console.log('Page URL copied to clipboard');
-  }
-  catch (err) {
-    console.error('Failed to copy: ', err);
-  }
-}
+        try {
+            await navigator.clipboard.writeText(data);
+            console.log('Page URL copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
 
     function encrypt_fun(key, data) {
         const result = encodemain(key, data);
-        if (result.length >= 50){
+        if (result.length >= 50) {
             copyPageUrl(result)
             $("#result").text('字符过长，已复制到剪切板');
-        }
-        else{
+        } else {
             $("#result").text('加密的结果是:' + result);
         }
     }
 
     function decrypt_fun(key, data) {
         const result = decodemain(key, data);
-        if (result.length >= 50){
+        if (result.length >= 50) {
             copyPageUrl(result)
             $("#result").text('字符过长，已复制到剪切板');
-        }
-        else {
+        } else {
             $("#result").text('解密的结果是:' + result);
 
         }
     }
-    function fileread(){
+
+    function fileread() {
+        document.getElementById('encrypt').href = 'javascript:jiamifileImport()';
+        document.getElementById('decrypt').href = 'javascript:jiemifileImport()';
+        document.getElementById('ico_en').href = 'javascript:jiamifileImport()';
+        document.getElementById('ico_de').href = 'javascript:jiemifileImport()';
         $("#files").click();
     }
 
-</script>
-    <script>
-        function fileImport() {
-            //获取读取我文件的File对象
-            var selectedFile = document.getElementById('files').files[0];
-            var name = selectedFile.name;//读取选中文件的文件名
-            var size = selectedFile.size;//读取选中文件的大小
-            console.log("文件名:"+name+"大小:"+size);
-            var reader = new FileReader();//这是核心,读取操作就是由它完成.
-            reader.readAsDataURL(selectedFile);
-            //reader.readAsText(selectedFile)
-            reader.onload = function () {
-                //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
-                $("#result").text('已选择文件，若要清空文件，请刷新');
-                document.getElementById("data").value=this.result;
-                document.getElementById("data").disabled = true;
+    function downloadFile(fileName, content) {
+        const a = document.createElement('a');
+        const event = document.createEvent('MouseEvents');
+        const blob = new Blob([content]);
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+    }
+
+
+    function jiamifileImport() {
+        //获取读取我文件的File对象
+        const selectedFile = document.getElementById('files').files[0];
+        const name = selectedFile.name;//读取选中文件的文件名
+        const size = selectedFile.size;//读取选中文件的大小
+        console.log("文件名:" + name + "大小:" + size);
+        const reader = new FileReader();//这是核心,读取操作就是由它完成.
+        reader.readAsDataURL(selectedFile);
+        //reader.readAsText(selectedFile)
+        reader.onload = function () {
+            const result = encodemain(数据.key.value, this.result);
+            document.getElementById("data").disabled = true;
+            //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
+            if (result === '密钥不能为空') {
+                $("#result").text = '密钥不能为空'
+            } else if (result === '密钥长度错误,请重新输入(密钥长度不能大于8)') {
+                $("#result").text = '密钥长度错误,请重新输入(密钥长度不能大于8)'
+            } else if (result === '输入的内容不是密文') {
+                $("#result").text = '输入的内容不是密文'
+            } else {
+                downloadFile('result.data', result)
+                $("#result").text = '已下载输出文件'
             }
         }
-    </script>
+    }
+
+    function jiemifileImport() {
+        //获取读取我文件的File对象
+        const selectedFile = document.getElementById('files').files[0];
+        const name = selectedFile.name;//读取选中文件的文件名
+        const size = selectedFile.size;//读取选中文件的大小
+        console.log("文件名:" + name + "大小:" + size);
+        const reader = new FileReader();//这是核心,读取操作就是由它完成.
+        reader.readAsText(selectedFile)
+        reader.onload = function () {
+            //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
+            const result = decodemain(数据.key.value, this.result);
+
+            document.getElementById("data").disabled = true;
+            if (result === '密钥不能为空') {
+                $("#result").text = '密钥不能为空'
+            } else if (result === '密钥长度错误,请重新输入(密钥长度不能大于8)') {
+                $("#result").text = '密钥长度错误,请重新输入(密钥长度不能大于8)'
+            } else if (result === '输入的内容不是密文') {
+                $("#result").text = '输入的内容不是密文'
+            } else {
+                window.location.href = result
+                $("#result").text = '已下载输出文件'
+
+            }
+        }
+    }
+
+    function oncancel_fun() {
+        $("#data").text('已选择文件，若要清空文件，请刷新');
+    }
+
+</script>
 
 <form name="数据">
     <div id="main">
-        <textarea cols="30" id="data" name="data" placeholder="请输入需要加密或解密的文字" rows="10"></textarea>
-        <input id="key" name="key" placeholder="请输入密钥"/>
+        <label for="data">
+            <textarea cols="30" id="data" name="data" placeholder="请输入需要加密或解密的文字" rows="10"></textarea>
+            <input id="key" name="key" placeholder="请输入密钥"/>
+        </label>
     </div>
     <div id="button">
         <div class="wrapper" style="display: flex; flex-direction: column">
             <div class="button">
                 <div class="icon">
-                    <i class="fa fa-chain fa-2x" onclick="encrypt_fun(数据.key.value,数据.data.value)"></i>
+                    <a href="javascript:encrypt_fun(数据.key.value,数据.data.value)" id="ico_en"><i
+                            class="fa fa-chain fa-2x"></i></a>
                 </div>
-                <span><a id="encrypt" onclick="encrypt_fun(数据.key.value,数据.data.value)">加密</a></span>
+                <span><a href="javascript:encrypt_fun(数据.key.value,数据.data.value)" id="encrypt">加密</a></span>
             </div>
             <div class="button">
                 <div class="icon">
-                    <i class="fa fa-chain-broken fa-2x" onclick="decrypt_fun(数据.key.value,数据.data.value)"></i>
+                    <a href="javascript:decrypt_fun(数据.key.value,数据.data.value)" id="ico_de"><i
+                            class="fa fa-chain-broken fa-2x"></i></a>
                 </div>
-                <span><a id="decrypt" onclick="decrypt_fun(数据.key.value,数据.data.value)">解密</a></span>
+                <span><a href="javascript:decrypt_fun(数据.key.value,数据.data.value)" id="decrypt">解密</a></span>
             </div>
             <div class="button" id="file">
                 <div class="icon">
                     <i class="fa fa-file fa-2x" onclick="fileread()"></i>
                 </div>
                 <span>
-                    <input type="file" id="files" style="display: none" onchange="fileImport();" accept=".txt,.zip"/>
+                    <input accept=".txt,.zip，.data" id="files" onchange="oncancel_fun()" style="display: none"
+                           type="file"/>
                     <a id="choose_file" onclick="fileread()">
                         选择文件
                     </a>
                 </span>
-
             </div>
-            <p id="result">此处出现结果</p>
+            <a href="" id="download" style="display: none"></a>
+            <a id="result" style="text-decoration:none;">此处出现结果</a>
             <p class="tip">Tip:密钥不可为空，不可大于8位</p>
             <p class="tip">文件选择目前仅支持txt文本，zip压缩文件，其他类型文件可打包zip</p>
             <p class="tip">若要取消文件选择，请刷新网页</p>
