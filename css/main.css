@@ -1,46 +1,54 @@
-body{
+body {
     background: #d7e1ec;
 }
-#main{
+
+#main {
     display: flex;
     flex-direction: column;
     float: left;
     margin-top: 15%;
     margin-left: 35%;
 }
-#data{
+
+#data {
     width: 100%;
     height: 60%;
 }
-#key{
+
+#key {
     margin-top: 10px;
     width: 100%;
 }
-#data,#key{
+
+#data, #key {
     border: 2px solid white;
     border-radius: 10px;
     background: #d7e1ec;
 }
-#button{
+
+#button {
     float: left;
     margin-left: 20px;
     margin-top: 15%;
     display: flex;
     flex-direction: column;
 }
-#result{
+
+#result {
     color: green;
 }
-#result,.tip{
+
+#result, .tip {
     margin-top: 10px;
 }
+
 a {
-	text-decoration: none; /* 去除默认的下划线 */
-	outline: none;	/* 去除旧版浏览器的点击后的外虚线框 */
+    text-decoration: none; /* 去除默认的下划线 */
+    outline: none; /* 去除旧版浏览器的点击后的外虚线框 */
 }
 
-#ico_de,#ico_en{
-	text-decoration: none; /* 去除默认的下划线 */
-	outline: none;	/* 去除旧版浏览器的点击后的外虚线框 */
-	color: #000;	/* 去除默认的颜色和点击后变化的颜色 */
+#ico_de, #ico_en {
+    text-decoration: none; /* 去除默认的下划线 */
+    outline: none; /* 去除旧版浏览器的点击后的外虚线框 */
+    color: #000; /* 去除默认的颜色和点击后变化的颜色 */
 }

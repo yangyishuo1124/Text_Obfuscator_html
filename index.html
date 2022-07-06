@@ -19,6 +19,8 @@
         from main import *
         window.encodemain = jiamimain
         window.decodemain = jiemimain
+
+
 </script>
 
 <form name="数据">
@@ -49,13 +51,14 @@
                     <i class="fa fa-file fa-2x" onclick="fileread()"></i>
                 </div>
                 <span>
-                    <input accept=".txt,.zip,.data" id="files" onchange="oncancel_fun()" style="display: none" type="file"/>
+                    <input accept=".txt,.zip,.data" id="files" onchange="oncancel_fun()" style="display: none"
+                           type="file"/>
                     <a id="choose_file" onclick="fileread()">
                         选择文件
                     </a>
                 </span>
             </div>
-            <a href="" id="download" style="display: none " download=""></a>
+            <a download="" href="" id="download" style="display: none "></a>
             <a id="result" style="text-decoration:none;">此处出现结果</a>
             <p class="tip">Tip:密钥不可为空，不可大于8位</p>
             <p class="tip">文件选择目前仅支持txt文本，zip压缩文件，其他类型文件可打包zip</p>
