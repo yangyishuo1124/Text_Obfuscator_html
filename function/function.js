@@ -61,14 +61,14 @@
             document.getElementById("data").disabled = true;
             //当读取完成后回调这个函数,然后此时文件的内容存储到了result中,直接操作即可
             if (result === '密钥不能为空') {
-                $("#result").text = '密钥不能为空'
+                $("#result").text('密钥不能为空')
             } else if (result === '密钥长度错误,请重新输入(密钥长度不能大于8)') {
-                $("#result").text = '密钥长度错误,请重新输入(密钥长度不能大于8)'
+                $("#result").text('密钥长度错误,请重新输入(密钥长度不能大于8)')
             } else if (result === '输入的内容不是密文') {
-                $("#result").text = '输入的内容不是密文'
+                $("#result").text('输入的内容不是密文')
             } else {
                 downloadFile('result.data', result)
-                $("#result").text = '已下载输出文件'
+                $("#result").text('已下载输出文件')
             }
         }
     }
@@ -87,15 +87,15 @@
 
             document.getElementById("data").disabled = true;
             if (result === '密钥不能为空') {
-                $("#result").text = '密钥不能为空'
+                $("#result").text('密钥不能为空')
             } else if (result === '密钥长度错误,请重新输入(密钥长度不能大于8)') {
-                $("#result").text = '密钥长度错误,请重新输入(密钥长度不能大于8)'
+                $("#result").text('密钥长度错误,请重新输入(密钥长度不能大于8)')
             } else if (result === '输入的内容不是密文') {
-                $("#result").text = '输入的内容不是密文'
+                $("#result").text('输入的内容不是密文')
             } else {
-                $("#download").href= result
+                $("#download").href(result)
                 $("#download").click()
-                $("#result").text = '已下载输出文件'
+                $("#result").text('已下载输出文件')
 
             }
         }
